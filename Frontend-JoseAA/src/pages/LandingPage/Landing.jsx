@@ -11,6 +11,9 @@ import {
   Calendar,
   ArrowRight,
 } from "lucide-react";
+import Footer from "../../components/Footer";
+
+import Navbar from "../../components/Navbar";
 
 const SchoolHomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -76,10 +79,9 @@ const SchoolHomePage = () => {
       }
       setIsMobileMenuOpen(false);
     }
-    // Si es "tramites", dejamos que React Router maneje la navegación (no hacemos preventDefault)
   };
 
-  // URLs
+  // imagenes
   const heroImage =
     "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvWQvxPU954VDKsmiMJhyphenhyphenYzYsgn-TS9vnijsNtzl2aKbl5vXBvwX1gYk7cZM5Ep-Whiqm6UB20VeDDnG7zr3Jv5XK8ZTwOppb90EQvmMS2HeL-FZFHxP5ifebeadLULhY90Qka9GH7h-ou/s1600/IMG00200.jpg";
   const logoUrl = "https://i.imgur.com/1tbjjyM.png";
@@ -96,119 +98,9 @@ const SchoolHomePage = () => {
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans text-gray-800">
       {/* NAVBAR */}
-      <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled ? `${theme.primary} shadow-lg py-2` : "bg-transparent py-4"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div
-              className={`rounded-full bg-white transition-all duration-300 shadow-md ${isScrolled ? "w-10 h-10 p-1" : "w-16 h-16 p-2"}`}
-            >
-              <img
-                src={logoUrl}
-                alt="Logo"
-                className="w-full h-full object-contain mix-blend-multiply"
-              />
-            </div>
-            <span
-              className={`font-serif font-bold text-white tracking-wide transition-all duration-300 ${isScrolled ? "text-lg" : "text-xl"}`}
-            >
-              U.E.N José Ángel Álamo
-            </span>
-          </div>
+      <Navbar />
 
-          {/* Menú Desktop */}
-          <div className="hidden md:flex gap-8 text-white text-sm font-medium tracking-wider items-center">
-            <a
-              href="#"
-              onClick={(e) => handleNavClick(e, "top")}
-              className="hover:text-red-300 transition"
-            >
-              INICIO
-            </a>
-            <a
-              href="#nosotros"
-              onClick={(e) => handleNavClick(e, "nosotros")}
-              className="hover:text-red-300 transition"
-            >
-              NOSOTROS
-            </a>
-
-            {/* ENLACE A PÁGINA DE TRÁMITES (React Router) */}
-            <Link to="/tramites" className="hover:text-red-300 transition">
-              TRÁMITES Y DESCARGAS
-            </Link>
-
-            <a
-              href="#contacto"
-              onClick={(e) => handleNavClick(e, "contacto")}
-              className="hover:text-red-300 transition"
-            >
-              CONTACTO
-            </a>
-
-            <Link
-              to="/login"
-              className="bg-red-700 hover:bg-red-800 px-4 py-2 rounded transition shadow-md"
-            >
-              Admin / Docentes
-            </Link>
-          </div>
-
-          {/* Botón Móvil */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-
-        {/* Menú Móvil */}
-        {isMobileMenuOpen && (
-          <div
-            className={`md:hidden ${theme.primary} absolute top-full left-0 w-full border-t border-blue-800 shadow-xl`}
-          >
-            <div className="flex flex-col p-6 space-y-4 text-white text-center">
-              <a
-                href="#"
-                onClick={(e) => handleNavClick(e, "top")}
-                className="py-2 hover:bg-blue-800 rounded"
-              >
-                INICIO
-              </a>
-              <a
-                href="#nosotros"
-                onClick={(e) => handleNavClick(e, "nosotros")}
-                className="py-2 hover:bg-blue-800 rounded"
-              >
-                NOSOTROS
-              </a>
-              <Link
-                to="/tramites"
-                className="py-2 hover:bg-blue-800 rounded"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                TRÁMITES
-              </Link>
-              <a
-                href="#contacto"
-                onClick={(e) => handleNavClick(e, "contacto")}
-                className="py-2 hover:bg-blue-800 rounded"
-              >
-                CONTACTO
-              </a>
-              <Link to="/login" className="py-2 bg-red-700 rounded mx-4">
-                Iniciar Sesión
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* HERO (Sin cambios mayores) */}
+      {/* HERO*/}
       <header
         className="relative h-[600px] flex items-center justify-center overflow-hidden"
         id="top"
@@ -243,7 +135,7 @@ const SchoolHomePage = () => {
         </div>
       </header>
 
-      {/* QUIENES SOMOS (Sin cambios) */}
+      {/* QUIENES SOMOS*/}
       <section
         id="nosotros"
         className="py-20 px-6 md:px-20 max-w-6xl mx-auto text-center relative"
@@ -391,11 +283,11 @@ const SchoolHomePage = () => {
               </div>
               <div className="flex items-center gap-4">
                 <Phone className="text-red-400 flex-shrink-0" />
-                <p>(212) 561-96-10 / (412) 555</p>
+                <p>(212) 561-96-10 / (412) 555-36-35</p>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="text-red-400 flex-shrink-0" />
-                <p>gradoedu@gmail.com</p>
+                <p>gradoeduca@gmail.com</p>
               </div>
             </div>
           </div>
@@ -417,47 +309,7 @@ const SchoolHomePage = () => {
       </section>
 
       {/*FOOTER*/}
-      <footer className="bg-[#112233] text-gray-400 py-12 border-t border-red-900">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4">
-            <div className="bg-white p-2 rounded-lg shadow-md h-16 w-16 flex items-center justify-center">
-              <img
-                src={logoUrl}
-                alt="Escudo"
-                className="w-full h-auto object-contain"
-              />
-            </div>
-            <div className="text-left">
-              <h4 className="text-white font-serif font-bold text-lg">
-                U.E.N José Ángel Álamo
-              </h4>
-              <p className="text-xs uppercase tracking-widest text-gray-500">
-                Desde 1967, educando para la vida.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            {/* enlace a Facebook */}
-            <a
-              href="https://www.facebook.com/groups/11153488515/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-red-500 transition transform hover:scale-110"
-              title="Grupo de Facebook"
-            >
-              <Facebook size={24} />
-            </a>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 mt-8 pt-8 border-t border-gray-800 text-center text-xs text-gray-600">
-          <p>
-            &copy; {new Date().getFullYear()} U.E.N José Ángel Álamo. Todos los
-            derechos reservados.
-          </p>
-        </div>
-      </footer>
+       <Footer />
     </div>
   );
 };

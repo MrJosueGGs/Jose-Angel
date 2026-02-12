@@ -1,4 +1,3 @@
-import api from '../api/axios';
 import React, { useState } from "react";
 import {
   LayoutDashboard,
@@ -12,7 +11,8 @@ import {
   User,
   CheckCircle,
   X,
-  Image as ImageIcon, 
+  // Nuevos iconos para el editor:
+  Image as ImageIcon, // Renombrado para evitar conflicto con etiqueta HTML Image
   Bold,
   Italic,
   List,
@@ -20,7 +20,7 @@ import {
   AlignLeft
 } from "lucide-react";
 
-
+// Reutilizamos el tema y recursos del Homepage para consistencia
 const theme = {
   primary: "bg-[#1B3A57]",
   primaryText: "text-[#1B3A57]",
@@ -30,13 +30,13 @@ const theme = {
   bgLight: "bg-[#FDFBF7]",
 };
 
-const logoUrl = "https://i.imgur.com/1tbjjyM.png"; 
+const logoUrl = "https://i.imgur.com/1tbjjyM.png";
 
 const SchoolAdmin = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState("dashboard"); 
+  const [activeTab, setActiveTab] = useState("dashboard"); // dashboard, news, files
 
-  
+  // Si no está logueado, mostrar pantalla de Login
   if (!isLoggedIn) {
     return <AdminLogin onLogin={() => setIsLoggedIn(true)} />;
   }
@@ -113,24 +113,15 @@ const SchoolAdmin = () => {
   );
 };
 
-
+/* --- SUB-COMPONENTES --- */
 
 // 1. PANTALLA DE LOGIN
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await api.post('api/auth/login/', {
-      username: email, // Django usa username
-      password: password
-    });
-    
-    // Guardamos el token para que axios lo use en todas las peticiones
-    localStorage.setItem('access', response.data.access);
-    onLogin(); // Activa el dashboard
-  } catch (err) {
-    alert("Usuario o clave incorrectos");
-  }
-
+const AdminLogin = ({ onLogin }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí iría la lógica real de autenticación
+    onLogin();
+  };
 
   return (
     <div className={`min-h-screen flex items-center justify-center ${theme.primary} relative overflow-hidden`}>
